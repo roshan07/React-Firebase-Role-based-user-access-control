@@ -37,7 +37,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.user ? (<Home purna={this.state.userEmail} />) : (<Login />)}
+        {this.state.user ? (<Home emailId={this.state.userEmail} />) : (<Login />)}
       </div>
     );
   }

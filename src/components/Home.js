@@ -21,7 +21,8 @@ class Home extends React.Component {
     }
 
     checkRole = () => {
-        var Id = firebase.auth().currentUser.uid; //gets the uid of currently logged in user
+        //gets the uid of currently logged in user
+        var Id = firebase.auth().currentUser.uid;
         firebase.database().ref().child("users").orderByChild("userID").equalTo(Id).once("value", (snapshot) => {
             snapshot.forEach((childSnapshot) => {
                 var childData = childSnapshot.val();
@@ -39,7 +40,7 @@ class Home extends React.Component {
             <div style={{ textAlign: 'center', marginTop: '70px' }}>
                 <h1>You Are Logged In</h1>
                 <br></br>
-                <h1>Your email address: {this.props.purna}</h1>
+                <h1>Your email address: {this.props.emailId}</h1>
                 <br></br>
                 <h1>You role is: {this.state.userRole}</h1>
                 {this.state.userRole === "admin" ? (<Admin />) : (<NormalUser />)}
