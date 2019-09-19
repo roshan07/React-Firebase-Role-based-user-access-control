@@ -1,0 +1,30 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.loginPage {
+    display: block;
+    text-align: center;
+    margin-top: 70px;
+}
+
+input {
+    text-align: center;
+    width: 200px;
+    height: 20px;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.logoutBtn {
+    background-color: #eb342b;
+}
