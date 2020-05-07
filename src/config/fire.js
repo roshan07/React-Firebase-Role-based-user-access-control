@@ -1,14 +1,6 @@
-import firebase from 'firebase';
+import firebase from "firebase";
 
-const firebaseConfig = {
-    apiKey: " ",
-    authDomain: " ",
-    databaseURL: " ",
-    projectId: " ",
-    storageBucket: " ",
-    messagingSenderId: " ",
-    appId: " "
-};
+const firebaseConfig = {};
 
 const fire = firebase.initializeApp(firebaseConfig);
 
