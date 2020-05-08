@@ -3,6 +3,15 @@ import fire from "../config/fire";
 import firebase from "firebase";
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      texts: {},
+      textLoaded: false,
+    };
+    //this.getTexts = this.getTexts.bind(this);
+  }
+
   login = () => {
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
@@ -63,17 +72,32 @@ export default class Login extends Component {
     e.preventDefault();
   };
 
-  getTexts = () => {
-    var leadsRef = firebase.database().ref().child("/texts");
-    leadsRef.on("value", function (snapshot) {
+  componentDidMount() {
+    /*var leadsRef = firebase.database().ref().child("/texts");
+      leadsRef.on("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         var childData = childSnapshot.val();
-        console.log(childData);
+        textData = childData;
+        console.log(textData);
+      });
+      this.setState({
+        texts: textData,
+        textLoaded: true,
+      });
+    }); */
+    var leadsRef = firebase.database().ref().child("/texts");
+    leadsRef.on("value", (snapshot) => {
+      const textData = snapshot.val();
+      console.log(textData);
+      this.setState({
+        texts: textData,
+        textLoaded: true,
       });
     });
-  };
+  }
 
   render() {
+    console.log(this.state.texts);
     return (
       <div className="loginPage">
         <h2>Firebase Role Based Access Control</h2>
@@ -102,9 +126,15 @@ export default class Login extends Component {
           Add Text
         </button>
         <br />
-        <button onClick={this.getTexts} style={{ margin: "15px" }}>
-          Get Text
-        </button>
+        <button style={{ margin: "15px" }}>Get Text</button>
+        <br />
+        <strong>
+          {this.state.textLoaded
+            ? Object.keys(this.state.texts).map((key) => (
+                <li key={key}>{this.state.texts[key].userText}</li>
+              ))
+            : "Texts not loaded yet"}
+        </strong>
       </div>
     );
   }
